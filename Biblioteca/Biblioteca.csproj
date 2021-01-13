@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibroController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -245,7 +246,10 @@
     <Content Include="Content\bootstrap_cerulean.min.css" />
     <Content Include="Content\bootstrap_lumen.css" />
     <Content Include="Content\bootstrap_lumen.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -271,6 +275,11 @@
     <Content Include="Models\Entity\Bibliotecota.edmx.diagram">
       <DependentUpon>Bibliotecota.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -319,6 +328,7 @@
     <Content Include="Views\Libro\Aleatorio.cshtml" />
     <Content Include="Views\Libro\_Aleatorio_LibroAleatorio.cshtml" />
     <Content Include="Views\Libro\_Aleatorio_SinSentido.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

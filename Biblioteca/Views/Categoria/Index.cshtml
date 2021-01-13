@@ -1,0 +1,44 @@
+﻿@using Biblioteca.Models.Entity
+
+@model   List<Categoria> 
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1> CATEGORIA</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th> Editar</th>
+            <th> Eliminar</th>
+            <th>Id</th>
+            <th>ValorIneterno</th>
+            <th>valor</th>
+           
+        </tr>
+    </thead>
+    @foreach (Categoria cat in Model)
+    {
+        <tr>
+             <td>
+                  <a href="boton"><i class="fa fa-pencil-alt"></i> </a>
+             </td>
+              <td>
+                 <a href="boton"> <i class="bi bi-pencil-fill"></i> </a>
+             </td>
+             <td>
+                 @cat.CategoriaId
+            </td>
+            <td>
+                @cat.ValorInterno
+            </td>
+            <td>
+                @cat.Valor
+            </td>
+           
+        </tr>
+
+    }
+    
+</table>
