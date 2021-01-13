@@ -1,0 +1,11 @@
+﻿@using Biblioteca.Models.Entity
+@model  List<TablaSinSentido>
+
+@foreach (var sin in Model)
+{
+
+    <ul>
+        <li>@sin.a - @sin.b - @sin.c </li>
+    </ul>
+}
+<hr>

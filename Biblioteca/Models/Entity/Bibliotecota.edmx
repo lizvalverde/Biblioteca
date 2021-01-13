@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BibliotecaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Biblioteca">
+          <Key>
+            <PropertyRef Name="BibliotecaId" />
+          </Key>
+          <Property Name="BibliotecaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoBiblioteca" Type="int" Nullable="false" />
+          <Property Name="Identificador" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Latitud" Type="decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Longitud" Type="decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ValorInterno" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Valor" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="LibroId" />
+          </Key>
+          <Property Name="LibroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoLibro" Type="int" Nullable="false" />
+          <Property Name="IdBiblioteca" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Resumen" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LibroCategoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="IdLibro" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Dani_Biblioteca.dbo.TablaSinSentido' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TablaSinSentido">
+          <Key>
+            <PropertyRef Name="a" />
+            <PropertyRef Name="b" />
+            <PropertyRef Name="c" />
+          </Key>
+          <Property Name="a" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="b" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="c" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoBiblioteca">
+          <Key>
+            <PropertyRef Name="TipoBibliotecaId" />
+          </Key>
+          <Property Name="TipoBibliotecaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ValorInterno" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Valor" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoLibro">
+          <Key>
+            <PropertyRef Name="TipoLibroId" />
+          </Key>
+          <Property Name="TipoLibroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ValorInterno" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Valor" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Biblioteca_TipoBiblioteca">
+          <End Role="TipoBiblioteca" Type="Self.TipoBiblioteca" Multiplicity="1" />
+          <End Role="Biblioteca" Type="Self.Biblioteca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoBiblioteca">
+              <PropertyRef Name="TipoBibliotecaId" />
+            </Principal>
+            <Dependent Role="Biblioteca">
+              <PropertyRef Name="IdTipoBiblioteca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Libro_Biblioteca">
+          <End Role="Biblioteca" Type="Self.Biblioteca" Multiplicity="1" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Biblioteca">
+              <PropertyRef Name="BibliotecaId" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="IdBiblioteca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Libro_TipoLibro">
+          <End Role="TipoLibro" Type="Self.TipoLibro" Multiplicity="1" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoLibro">
+              <PropertyRef Name="TipoLibroId" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="IdTipoLibro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LibroCategoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="LibroCategoria" Type="Self.LibroCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="LibroCategoria">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LibroCategoria_Libro">
+          <End Role="Libro" Type="Self.Libro" Multiplicity="1" />
+          <End Role="LibroCategoria" Type="Self.LibroCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Libro">
+              <PropertyRef Name="LibroId" />
+            </Principal>
+            <Dependent Role="LibroCategoria">
+              <PropertyRef Name="IdLibro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BibliotecaModelStoreContainer">
+          <EntitySet Name="Biblioteca" EntityType="Self.Biblioteca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LibroCategoria" EntityType="Self.LibroCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoBiblioteca" EntityType="Self.TipoBiblioteca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoLibro" EntityType="Self.TipoLibro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TablaSinSentido" EntityType="Self.TablaSinSentido" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TablaSinSentido].[a] AS [a], 
+    [TablaSinSentido].[b] AS [b], 
+    [TablaSinSentido].[c] AS [c]
+    FROM [dbo].[TablaSinSentido] AS [TablaSinSentido]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Biblioteca_TipoBiblioteca" Association="Self.FK_Biblioteca_TipoBiblioteca">
+            <End Role="TipoBiblioteca" EntitySet="TipoBiblioteca" />
+            <End Role="Biblioteca" EntitySet="Biblioteca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Libro_Biblioteca" Association="Self.FK_Libro_Biblioteca">
+            <End Role="Biblioteca" EntitySet="Biblioteca" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Libro_TipoLibro" Association="Self.FK_Libro_TipoLibro">
+            <End Role="TipoLibro" EntitySet="TipoLibro" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LibroCategoria_Categoria" Association="Self.FK_LibroCategoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="LibroCategoria" EntitySet="LibroCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LibroCategoria_Libro" Association="Self.FK_LibroCategoria_Libro">
+            <End Role="Libro" EntitySet="Libro" />
+            <End Role="LibroCategoria" EntitySet="LibroCategoria" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BibliotecaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Biblioteca">
+          <Key>
+            <PropertyRef Name="BibliotecaId" />
+          </Key>
+          <Property Name="BibliotecaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoBiblioteca" Type="Int32" Nullable="false" />
+          <Property Name="Identificador" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Latitud" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Longitud" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TipoBiblioteca" Relationship="Self.FK_Biblioteca_TipoBiblioteca" FromRole="Biblioteca" ToRole="TipoBiblioteca" />
+          <NavigationProperty Name="Libro" Relationship="Self.FK_Libro_Biblioteca" FromRole="Biblioteca" ToRole="Libro" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValorInterno" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Valor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Libro" Relationship="Self.LibroCategoria" FromRole="Categoria" ToRole="Libro" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="LibroId" />
+          </Key>
+          <Property Name="LibroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoLibro" Type="Int32" Nullable="false" />
+          <Property Name="IdBiblioteca" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Resumen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Biblioteca" Relationship="Self.FK_Libro_Biblioteca" FromRole="Libro" ToRole="Biblioteca" />
+          <NavigationProperty Name="TipoLibro" Relationship="Self.FK_Libro_TipoLibro" FromRole="Libro" ToRole="TipoLibro" />
+          <NavigationProperty Name="Categoria" Relationship="Self.LibroCategoria" FromRole="Libro" ToRole="Categoria" />
+        </EntityType>
+        <EntityType Name="TipoBiblioteca">
+          <Key>
+            <PropertyRef Name="TipoBibliotecaId" />
+          </Key>
+          <Property Name="TipoBibliotecaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValorInterno" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Valor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Biblioteca" Relationship="Self.FK_Biblioteca_TipoBiblioteca" FromRole="TipoBiblioteca" ToRole="Biblioteca" />
+        </EntityType>
+        <EntityType Name="TipoLibro">
+          <Key>
+            <PropertyRef Name="TipoLibroId" />
+          </Key>
+          <Property Name="TipoLibroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValorInterno" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Valor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Libro" Relationship="Self.FK_Libro_TipoLibro" FromRole="TipoLibro" ToRole="Libro" />
+        </EntityType>
+        <Association Name="FK_Biblioteca_TipoBiblioteca">
+          <End Role="TipoBiblioteca" Type="Self.TipoBiblioteca" Multiplicity="1" />
+          <End Role="Biblioteca" Type="Self.Biblioteca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoBiblioteca">
+              <PropertyRef Name="TipoBibliotecaId" />
+            </Principal>
+            <Dependent Role="Biblioteca">
+              <PropertyRef Name="IdTipoBiblioteca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Libro_Biblioteca">
+          <End Role="Biblioteca" Type="Self.Biblioteca" Multiplicity="1" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Biblioteca">
+              <PropertyRef Name="BibliotecaId" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="IdBiblioteca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Libro_TipoLibro">
+          <End Role="TipoLibro" Type="Self.TipoLibro" Multiplicity="1" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoLibro">
+              <PropertyRef Name="TipoLibroId" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="IdTipoLibro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LibroCategoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="*" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BibliotecaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Biblioteca" EntityType="Self.Biblioteca" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Libro" EntityType="Self.Libro" />
+          <EntitySet Name="TipoBiblioteca" EntityType="Self.TipoBiblioteca" />
+          <EntitySet Name="TipoLibro" EntityType="Self.TipoLibro" />
+          <AssociationSet Name="FK_Biblioteca_TipoBiblioteca" Association="Self.FK_Biblioteca_TipoBiblioteca">
+            <End Role="TipoBiblioteca" EntitySet="TipoBiblioteca" />
+            <End Role="Biblioteca" EntitySet="Biblioteca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Libro_Biblioteca" Association="Self.FK_Libro_Biblioteca">
+            <End Role="Biblioteca" EntitySet="Biblioteca" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Libro_TipoLibro" Association="Self.FK_Libro_TipoLibro">
+            <End Role="TipoLibro" EntitySet="TipoLibro" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+          <AssociationSet Name="LibroCategoria" Association="Self.LibroCategoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+          <EntitySet Name="TablaSinSentido" EntityType="BibliotecaModel.TablaSinSentido" />
+        </EntityContainer>
+        <EntityType Name="TablaSinSentido">
+          <Key>
+            <PropertyRef Name="a" />
+            <PropertyRef Name="b" />
+            <PropertyRef Name="c" />
+          </Key>
+          <Property Name="a" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="b" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="c" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BibliotecaModelStoreContainer" CdmEntityContainer="BibliotecaEntities">
+          <EntitySetMapping Name="Biblioteca">
+            <EntityTypeMapping TypeName="BibliotecaModel.Biblioteca">
+              <MappingFragment StoreEntitySet="Biblioteca">
+                <ScalarProperty Name="BibliotecaId" ColumnName="BibliotecaId" />
+                <ScalarProperty Name="IdTipoBiblioteca" ColumnName="IdTipoBiblioteca" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="BibliotecaModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="ValorInterno" ColumnName="ValorInterno" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Libro">
+            <EntityTypeMapping TypeName="BibliotecaModel.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="LibroId" ColumnName="LibroId" />
+                <ScalarProperty Name="IdTipoLibro" ColumnName="IdTipoLibro" />
+                <ScalarProperty Name="IdBiblioteca" ColumnName="IdBiblioteca" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Resumen" ColumnName="Resumen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoBiblioteca">
+            <EntityTypeMapping TypeName="BibliotecaModel.TipoBiblioteca">
+              <MappingFragment StoreEntitySet="TipoBiblioteca">
+                <ScalarProperty Name="TipoBibliotecaId" ColumnName="TipoBibliotecaId" />
+                <ScalarProperty Name="ValorInterno" ColumnName="ValorInterno" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoLibro">
+            <EntityTypeMapping TypeName="BibliotecaModel.TipoLibro">
+              <MappingFragment StoreEntitySet="TipoLibro">
+                <ScalarProperty Name="TipoLibroId" ColumnName="TipoLibroId" />
+                <ScalarProperty Name="ValorInterno" ColumnName="ValorInterno" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LibroCategoria" TypeName="BibliotecaModel.LibroCategoria" StoreEntitySet="LibroCategoria">
+            <EndProperty Name="Categoria">
+              <ScalarProperty Name="CategoriaId" ColumnName="IdCategoria" />
+            </EndProperty>
+            <EndProperty Name="Libro">
+              <ScalarProperty Name="LibroId" ColumnName="IdLibro" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="TablaSinSentido">
+            <EntityTypeMapping TypeName="BibliotecaModel.TablaSinSentido">
+              <MappingFragment StoreEntitySet="TablaSinSentido">
+                <ScalarProperty Name="c" ColumnName="c" />
+                <ScalarProperty Name="b" ColumnName="b" />
+                <ScalarProperty Name="a" ColumnName="a" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

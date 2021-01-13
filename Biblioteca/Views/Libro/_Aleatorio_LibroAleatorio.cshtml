@@ -1,0 +1,18 @@
+﻿@using Biblioteca.Models.Entity
+
+
+@model  Libro
+
+<h2>Titulo: @Model.Titulo</h2>
+<h2>Resumen:  @Model.Resumen</h2>
+<h2>Biblioteca: @Model.Biblioteca.Nombre  </h2>
+<h2>Tipo de libro: @Model.TipoLibro.Valor </h2>
+<h2>Este Libro tiene las siguientes categorias</h2>
+
+@foreach (var categoria in Model.Categoria)
+{
+
+    <ul>
+        <li>@categoria.Valor </li>
+    </ul>
+}
