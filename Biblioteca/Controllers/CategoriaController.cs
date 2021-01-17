@@ -20,5 +20,44 @@ namespace Biblioteca.Controllers
 
             return View(listacategoria);
         }
+
+        public ActionResult Editar( int id) {
+
+            try
+            {
+                BibliotecaEntities db = new BibliotecaEntities();
+
+                Categoria cat = db.Categoria.FirstOrDefault(x => x.CategoriaId.Equals(id));
+                db.Dispose();
+                return View(cat);
+
+            }
+            catch (Exception e)
+            {
+                return Content(e.Message);
+            }
+            
+        }
+        public ActionResult ModificarCategoria(int id, string valor, string valorinterno)
+        {
+            try
+            {
+                BibliotecaEntities db = new BibliotecaEntities();
+
+                Categoria cat = db.Categoria.FirstOrDefault(x => x.CategoriaId.Equals(id));
+                cat.Valor = valor;
+                cat.ValorInterno = valorinterno;
+                db.SaveChanges();
+                db.Dispose();
+
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                return Content(e.Message);
+            }
+        }
+
     }
 }

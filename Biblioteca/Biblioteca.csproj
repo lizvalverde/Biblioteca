@@ -329,6 +329,7 @@
     <Content Include="Views\Libro\_Aleatorio_LibroAleatorio.cshtml" />
     <Content Include="Views\Libro\_Aleatorio_SinSentido.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Categoria\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,23 @@
+﻿@using Biblioteca.Models.Entity
+@model Categoria
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editarv1</h2>
+@using (Html.BeginForm("ModificarCategoria", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
+{  
+    <input type="hidden" name="id" value="@Model.CategoriaId" />
+    <label>Valor Interno</label>
+    <input type="text" name="valorinterno" value="@Model.ValorInterno">
+    <label>Valor </label>
+    <input type="text" name="valor" value="@Model.Valor">
+    <input type="submit"  value="Editar"/>
+    
+}
+
+
+
+

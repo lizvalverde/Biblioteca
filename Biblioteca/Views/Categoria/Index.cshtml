@@ -7,31 +7,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1> CATEGORIA</h1>
+<a href="boton">
+    <i class="fa fa-plus" aria-hidden="true"></i> <label>Nuevo</label>
+    
+</a>
 <table border="1">
     <thead>
         <tr>
+            <th> Detalle</th>
             <th> Editar</th>
             <th> Eliminar</th>
             <th>Id</th>
             <th>ValorIneterno</th>
             <th>valor</th>
+
            
         </tr>
     </thead>
     @foreach (Categoria cat in Model)
     {
         <tr>
+            <td class="center">
+                <a href="boton">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </td>
              <td>
-                  <a href="boton">
+                  <a href="@Url.Action("Editar","Categoria", new {id= cat.CategoriaId} )" >
                         <i class="fa fa-pencil"></i>
                   </a>
              </td>
-              <td>
+              <td class="center">
                   <a href="boton">
-                      <i class="fa fa-times" aria-hidden="true"></i>
+                      <i class="fa fa-remove" aria-hidden="true"></i>
                   </a>
              </td>
-             <td>
+            <td>
                  @cat.CategoriaId
             </td>
             <td>
