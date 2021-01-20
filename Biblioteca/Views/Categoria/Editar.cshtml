@@ -7,7 +7,8 @@
 }
 
 <h2>Editarv1</h2>
-@using (Html.BeginForm("ModificarCategoria", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
+@*helpers*@ 
+@using (Html.BeginForm("Editar", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
 {  
     <input type="hidden" name="id" value="@Model.CategoriaId" />
     <label>Valor Interno</label>
@@ -16,6 +17,32 @@
     <input type="text" name="valor" value="@Model.Valor">
     <input type="submit"  value="Editar"/>
     
+}
+
+
+<h2>Editarv2</h2>
+@using (Html.BeginForm("Editar", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
+{
+    <input type="hidden" name="CategoriaId" value="@Model.CategoriaId" />
+    <label>Valor Interno</label>
+    <input type="text" name="valorinterno" value="@Model.ValorInterno">
+    <label>Valor </label>
+    <input type="text" name="valor" value="@Model.Valor">
+    <input type="submit" value="Editar" />
+
+}
+@*https://www.tutorialsteacher.com/mvc/html-helpers*@
+
+<h2>Editarv3</h2>
+@using (Html.BeginForm("Editar", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
+{
+   @Html.HiddenFor(x=>x.CategoriaId)
+   @Html.LabelFor(x => x.ValorInterno)
+   @Html.TextBoxFor(x => x.ValorInterno)
+   @Html.LabelFor(x => x.Valor)
+   @Html.TextBoxFor(x => x.Valor)
+   <input type="submit" value="Editar"/>
+
 }
 
 
