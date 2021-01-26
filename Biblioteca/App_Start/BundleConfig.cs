@@ -33,6 +33,12 @@ namespace Biblioteca
                      "~/Content/font-awesome.css"
                      ));
 
+            bundles.Add(new ScriptBundle("~/Scripts/Site").Include(
+                              "~/Scripts/Site.js"));
+
+
+
+
 
 
 
