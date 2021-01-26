@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Biblioteca.Models.ViewModels.Error;
 
 namespace Biblioteca.Controllers
 {
@@ -34,9 +35,29 @@ namespace Biblioteca.Controllers
             }
             catch (Exception e)
             {
-                return Content(e.Message);
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
             }
-            
+
+        }
+        public ActionResult Detalle(int id)
+        {
+
+            try
+            {
+                BibliotecaEntities db = new BibliotecaEntities();
+
+                Categoria cat = db.Categoria.FirstOrDefault(x => x.CategoriaId.Equals(id));
+                db.Dispose();
+                return View(cat);
+
+            }
+            catch (Exception e)
+            {
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
+            }
+
         }
         [HttpPost]
         public ActionResult Editarv1(int id, string valor, string valorinterno)
@@ -56,7 +77,8 @@ namespace Biblioteca.Controllers
             }
             catch (Exception e)
             {
-                return Content(e.Message);
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
             }
         }
         [HttpPost]
@@ -77,10 +99,94 @@ namespace Biblioteca.Controllers
             }
             catch (Exception e)
             {
-                return Content(e.Message);
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
             }
+        }
+        [HttpPost]
+        public ActionResult Crear(Categoria categ)
+        {
+            try
+            {
+                BibliotecaEntities db = new BibliotecaEntities();
+                db.Categoria.Add(categ);
+                db.SaveChanges();
+                db.Dispose();
+
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
+            }
+        }
+        // este por defecto tiene GET 
+        public ActionResult Crear()
+        {
+
+            try
+            {
+
+                Categoria cat = new Categoria();
+               
+                return View(cat);
+
+            }
+            catch (Exception e)
+            {
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
+            }
+
+        }
+        [HttpGet]
+        public ActionResult Eliminar(int id)
+        {
+
+            try
+            {
+                BibliotecaEntities db = new BibliotecaEntities();
+
+                Categoria cat = db.Categoria.FirstOrDefault(x => x.CategoriaId.Equals(id));
+                db.Dispose();
+                return View(cat);
+
+            }
+            catch (Exception e)
+            {
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+
+            }
+
+        }
+        [HttpPost]
+        public ActionResult EliminarOK(int CategoriaId)
+        {
+
+            try
+            {
+                BibliotecaEntities db = new BibliotecaEntities();
+
+                Categoria cat = db.Categoria.FirstOrDefault(x => x.CategoriaId.Equals(CategoriaId));
+                db.Categoria.Remove(cat);
+                db.SaveChanges();
+                db.Dispose();
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                return new ErrorController().Index(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+                    //(new Error { excepcion = e, direccion = new url { controlador = "Categoria", accion = "Index" } });
+            }
+
         }
 
 
+
+
     }
+
 }

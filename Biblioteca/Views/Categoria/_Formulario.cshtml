@@ -1,0 +1,15 @@
+﻿@using Biblioteca.Models.Entity
+@model Categoria
+
+<a  href="@Url.Action("Index","Categoria")">
+    <i class="fa fa-arrow-left" aria-hidden="true"> </i> <label>Atras</label>
+</a>
+<br />
+
+@Html.HiddenFor(x => x.CategoriaId)
+@Html.LabelFor(x => x.ValorInterno)
+@Html.TextBoxFor(x => x.ValorInterno)
+<br /><br />
+@Html.LabelFor(x => x.Valor)
+@Html.TextBoxFor(x => x.Valor)
+<br />

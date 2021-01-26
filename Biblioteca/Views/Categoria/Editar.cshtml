@@ -36,12 +36,8 @@
 <h2>Editarv3</h2>
 @using (Html.BeginForm("Editar", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
 {
-   @Html.HiddenFor(x=>x.CategoriaId)
-   @Html.LabelFor(x => x.ValorInterno)
-   @Html.TextBoxFor(x => x.ValorInterno)
-   @Html.LabelFor(x => x.Valor)
-   @Html.TextBoxFor(x => x.Valor)
-   <input type="submit" value="Editar"/>
+    @Html.Partial("_Formulario",Model)
+   <input type="submit"  value="Editar"/>
 
 }
 

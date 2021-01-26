@@ -1,0 +1,27 @@
+﻿@using Biblioteca.Models.ViewModels.Error
+
+@model Error
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<a href="@Url.Action( Model.direccion.accion, Model.direccion.controlador)">
+    <i class="fa fa-arrow-left" aria-hidden="true"> </i> <label>Atras</label>
+</a>
+<br />
+
+<h1 class="text-danger">Error.</h1>
+<h2> @Model.excepcion.Message</h2>
+@if (Model.excepcion.InnerException != null)
+{
+    <h2> @Model.excepcion.InnerException.Message</h2>
+}
+@if (Model.excepcion.InnerException != null && Model.excepcion.InnerException.InnerException != null)
+{
+    <h2> @Model.excepcion.InnerException.InnerException.Message</h2>
+}
+
+
+
+

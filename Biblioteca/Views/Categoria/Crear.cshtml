@@ -1,0 +1,16 @@
+﻿@using Biblioteca.Models.Entity
+@model Categoria
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear</h2>
+
+@using (Html.BeginForm("Crear", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
+{
+    @Html.Partial("_Formulario", Model)
+    <input type="submit" value="Crear" />
+
+}
+

@@ -7,7 +7,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1> CATEGORIA</h1>
-<a href="boton">
+
+<a href="@Url.Action("Crear","Categoria")">
     <i class="fa fa-plus" aria-hidden="true"></i> <label>Nuevo</label>
     
 </a>
@@ -28,7 +29,7 @@
     {
         <tr>
             <td class="center">
-                <a href="boton">
+                <a href="@Url.Action("Detalle","Categoria", new {id= cat.CategoriaId} )">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
             </td>
@@ -38,7 +39,7 @@
                   </a>
              </td>
               <td class="center">
-                  <a href="boton">
+                  <a href="@Url.Action("Eliminar","Categoria", new {id= cat.CategoriaId} )">
                       <i class="fa fa-remove" aria-hidden="true"></i>
                   </a>
              </td>
