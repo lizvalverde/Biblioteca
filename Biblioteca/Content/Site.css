@@ -43,7 +43,7 @@ td {
     background-image: linear-gradient(#093200, #116000 60%, #1a9a00) !important;
 }
 
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+.navbar-inverse .navbar-nav .dropdown-menu > li > a {
     color: #9ffe9f !important;
 }
 
@@ -132,7 +132,7 @@ nav.sidebar, .main {
     }
 
     /* Colors/style dropdown box*/
-    nav.sidebar .navbar-nav .open .dropdown-menu {
+    nav.sidebar .navbar-nav .dropdown-menu {
         position: static;
         float: none;
         width: auto;
