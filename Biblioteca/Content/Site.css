@@ -43,6 +43,10 @@ td {
     background-image: linear-gradient(#093200, #116000 60%, #1a9a00) !important;
 }
 
+body {
+    background-image: linear-gradient(#0932002e, #11600033 60%, #1a9a0082) !important;
+}
+
 .navbar-inverse .navbar-nav .dropdown-menu > li > a {
     color: #9ffe9f !important;
 }
@@ -210,4 +214,12 @@ nav:hover .forAnimate {
 
 section {
     padding-left: 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #126500;
+}
+
+a, i, a:hover {
+    color: #00bc76;
 }
