@@ -15,7 +15,7 @@
     <input type="text" name="valorinterno" value="@Model.ValorInterno">
     <label>Valor </label>
     <input type="text" name="valor" value="@Model.Valor">
-    <input type="submit"  value="Editar"/>
+    <input type="submit"  value="Editar" class="btn btn-success"/>
     
 }
 
@@ -28,7 +28,7 @@
     <input type="text" name="valorinterno" value="@Model.ValorInterno">
     <label>Valor </label>
     <input type="text" name="valor" value="@Model.Valor">
-    <input type="submit" value="Editar" />
+    <input type="submit" value="Editar" class="btn btn-success"/>
 
 }
 @*https://www.tutorialsteacher.com/mvc/html-helpers*@
@@ -37,7 +37,7 @@
 @using (Html.BeginForm("Editar", "Categoria", FormMethod.Post, new { @id = "miformulario", @class = "form-horizontal" }))
 {
     @Html.Partial("_Formulario",Model)
-   <input type="submit"  value="Editar"/>
+   <input type="submit"  value="Editar" class="btn btn-success"/>
 
 }
 
