@@ -223,3 +223,13 @@ h1, h2, h3, h4, h5, h6 {
 a, i, a:hover {
     color: #00bc76;
 }
+
+thead > tr {
+    background-color: green !important;
+    color: white !important;
+}
+
+tbody > tr {
+    background-color: #ccffc28f !important;
+    color: black !important;
+}
