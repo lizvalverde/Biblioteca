@@ -30,11 +30,13 @@ namespace Biblioteca
             bundles.Add(new StyleBundle("~/Content/css").Include(
                      "~/Content/bootstrap_cerulean.css",
                      "~/Content/site.css" , 
-                     "~/Content/font-awesome.css"
+                     "~/Content/font-awesome.css",
+                     "~/Content/DataTables/datatables.min.css"
                      ));
 
             bundles.Add(new ScriptBundle("~/Scripts/Site").Include(
-                              "~/Scripts/Site.js"));
+                              "~/Scripts/Site.js",
+                              "~/Content/DataTables/datatables.min.js"));
 
 
 
