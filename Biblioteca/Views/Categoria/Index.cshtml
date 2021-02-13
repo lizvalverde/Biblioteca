@@ -12,7 +12,7 @@
     <i class="fa fa-plus" aria-hidden="true"></i> <label>Nuevo</label>
     
 </a>
-<table border="1">
+<table border="1" id="idCategoriaListado">
     <thead>
         <tr>
             <th> Detalle</th>
@@ -58,3 +58,11 @@
     }
     
 </table>
+<script>
+    $(document).ready(function () {
+        //console.log("ready!");
+        $("#idCategoriaListado").DataTable()
+    });
+
+   
+</script>
